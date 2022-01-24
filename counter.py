@@ -1,6 +1,7 @@
 from tracker import Tracker
 import imutils
 import cv2
+from google.colab import cv2_imshow
 
 class Counter():
     def __init__(self):
@@ -30,7 +31,8 @@ class Counter():
         return cap, fps, h, w
     
     def start_count(self,cap,h,w):
-        while True:
+        org = (50,50)
+        for i in range(50):
             _, img = cap.read() # read frame from video
             if img is None:
                 break
@@ -63,9 +65,13 @@ class Counter():
                     elif int(out[-1]) == 2:    
                         self.object_count['Car']+=1
                     self.left_right_count[1]+=1
-                # im = imutils.resize(image, height=h,width=w)
-                # image = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
-                # vid_writer.write(image) 
+                for key,value in self.object_count:
+                  cv2.putText(image,f'{key}:{value}',org, cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+                  org[0] += 20
+                cv2_imshow(image)
+                im = imutils.resize(image, height=h,width=w)
+                image = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+                self.vid_writer.write(image)
         cap.release()
 
 if __name__ == "__main__":
