@@ -1,11 +1,11 @@
 import numpy as np
 import torch
 
-from .deep.feature_extractor import Extractor
-from .sort.nn_matching import NearestNeighborDistanceMetric
-from .sort.preprocessing import non_max_suppression
-from .sort.detection import Detection
-from .sort.tracker import Tracker
+from deep.feature_extractor import Extractor
+from sort.nn_matching import NearestNeighborDistanceMetric
+from sort.preprocessing import non_max_suppression
+from sort.detection import Detection
+from sort.tracker import Tracker
 
 
 __all__ = ['DeepSort']
@@ -57,7 +57,7 @@ class DeepSort(object):
 
     """
     TODO:
-        Convert bbox from xc_yc_w_h to xtl_ytl_w_h
+        Convert bbox from c_yc_w_h to xtl_ytl_w_h
     Thanks JieChen91@github.com for reporting this bug!
     """
     @staticmethod
